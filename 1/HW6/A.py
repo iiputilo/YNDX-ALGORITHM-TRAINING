@@ -4,22 +4,21 @@ n_seq.sort()
 k_seq = list(map(int, input().split()))
 
 
-def bin_search(num, seq):
+def left_bin_search(num, seq):
     l = 0
     r = n - 1
     if num > seq[-1]:
-        return seq[-1]
-    while r - l != 1:
+        return 'NO'
+    while seq[l] < num:
         m = (l + r) // 2
         if seq[m] < num:
-            l = m
+            l = m + 1
         else:
             r = m
-    if (num - seq[l]) < (seq[r] - num) or (num - seq[l]) == (seq[r] - num):
-        return seq[l]
-    else:
-        return seq[r]
+    if seq[l] == num:
+        return 'YES'
+    return 'NO'
 
 
 for i in k_seq:
-    print(bin_search(i, n_seq))
+    print(left_bin_search(i, n_seq))
